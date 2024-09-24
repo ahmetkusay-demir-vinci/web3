@@ -6,12 +6,15 @@ function ClickCounter({
   messageClick = "You are a master in the art of clicking !",
   messageMouseOver = "Please, click on me now !",
 }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(JSON.parse(localStorage.getItem("count")) ?? 0);
   const [mouseOver, setMouseOver] = useState(false);
 
   const handleClick = () => {
     console.log(`value of count before click: ${count}`);
-    setCount(count + 1);
+    // avant j'avais juste setCount(count + 1);
+    const newCount = count + 1;
+    setCount(newCount);
+    localStorage.setItem("count", JSON.stringify(newCount));    
   };
 
   const handleMouseEnter = () => {
