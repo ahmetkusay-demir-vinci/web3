@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./ClickCounter.css";
 
-function ClickCounter() {
+function ClickCounter({title,messageClick = "You are a master in the art of clicking !",}) {
   const [count, setCount] = useState(0);
 
   const handleClick = () => {
@@ -11,10 +11,9 @@ function ClickCounter() {
 
   return (
     <div className="card">
+      <h2>{title}</h2>
       <button onClick={handleClick}>count is {count}</button>
-      <p>
-        Edit <code>src/App.jsx</code> and save to test HMR
-      </p>
+      {count > 10 ? <p>{messageClick}</p> : null}
     </div>
   );
 }

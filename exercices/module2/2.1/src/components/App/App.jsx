@@ -16,7 +16,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       
-      <ClickCounter />
+      <ClickCounter title="Kusikusay Counter"/>
 
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
