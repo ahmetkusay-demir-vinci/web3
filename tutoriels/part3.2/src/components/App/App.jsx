@@ -17,7 +17,7 @@ const App = (props) => {
       {/* utilisation de la méthode map pour afficher les éléments du tableau de main.jsx */}
       <ul>
         {notes.map((note) => (
-          <li>{note.content}</li>
+          <li key={note.id}>{note.content}</li>
         ))}
       </ul>
     </div>
