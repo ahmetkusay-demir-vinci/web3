@@ -74,7 +74,7 @@ const App = () => {
         <button onClick={setToValue(0)}>reset</button>
         <button onClick={setToValue(value + 1)}>increment</button>
       </div>
-      {value}
+      {value}   
     </div>
   );
 };
