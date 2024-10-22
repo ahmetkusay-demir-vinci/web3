@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import axios from "axios";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "0478359624" },
-  ]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+
+  // Hook d'effet pour récupérer les données depuis le serveur
+  useEffect(() => {
+    axios.get("http://localhost:3001/persons").then((response) => {
+      setPersons(response.data);
+    });
+  }, []);
 
   // Fonction pour gérer la soumission du formulaire
   const addPerson = (event) => {
@@ -20,11 +26,17 @@ const App = () => {
       const personObject = {
         name: newName,
         number: newNumber,
+        id: persons.length + 1,
       };
-      // Ajouter la nouvelle personne au tableau
-      setPersons(persons.concat(personObject));
-      setNewName(""); // Réinitialiser l'entrée du formulaire pour le nom
-      setNewNumber(""); // Réinitialiser l'entrée du formulaire pour le numéro
+
+      axios
+        .post("http://localhost:3001/persons", personObject)
+        .then((response) => {
+          // Ajouter la nouvelle personne au tableau
+          setPersons(persons.concat(personObject));
+          setNewName(""); // Réinitialiser l'entrée du formulaire pour le nom
+          setNewNumber(""); // Réinitialiser l'entrée du formulaire pour le numéro
+        });
     }
   };
 
@@ -53,8 +65,8 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map((person, index) => (
-          <li key={index}>
+        {persons.map((person) => (
+          <li key={person.id}>
             {person.name} {person.number}
           </li>
         ))}
