@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: 'Arto Hellas' }]);
-  const [newName, setNewName] = useState('');
+  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [newName, setNewName] = useState("");
 
   // Fonction pour gérer la soumission du formulaire
   const addPerson = (event) => {
@@ -12,9 +12,19 @@ const App = () => {
       name: newName,
     };
 
-    // Ajouter la nouvelle personne au tableau
-    setPersons(persons.concat(personObject));
-    setNewName(''); // Réinitialiser l'entrée du formulaire
+    // Vérifier si le nom existe déjà dans le répertoire 
+    const nameExists = persons.some((person) => person.name === newName);
+
+    if (nameExists) {
+      alert(`${newName} is already added to phonebook`);
+    } else {
+      const personObject = {
+        name: newName,
+      };
+      // Ajouter la nouvelle personne au tableau
+      setPersons(persons.concat(personObject));
+      setNewName(""); // Réinitialiser l'entrée du formulaire
+    }
   };
 
   // Fonction pour capturer les changements dans l'entrée
