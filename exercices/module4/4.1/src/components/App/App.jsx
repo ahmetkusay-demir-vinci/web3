@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
+import personService from "services/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -9,8 +10,8 @@ const App = () => {
 
   // Hook d'effet pour récupérer les données depuis le serveur
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      setPersons(response.data);
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
     });
   }, []);
 
@@ -29,14 +30,12 @@ const App = () => {
         id: persons.length + 1,
       };
 
-      axios
-        .post("http://localhost:3001/persons", personObject)
-        .then((response) => {
-          // Ajouter la nouvelle personne au tableau
-          setPersons(persons.concat(personObject));
-          setNewName(""); // Réinitialiser l'entrée du formulaire pour le nom
-          setNewNumber(""); // Réinitialiser l'entrée du formulaire pour le numéro
-        });
+      personService.create(personObject).then((returnedPerson) => {
+        // Ajouter la nouvelle personne au tableau
+        setPersons(persons.concat(personObject));
+        setNewName(""); // Réinitialiser l'entrée du formulaire pour le nom
+        setNewNumber(""); // Réinitialiser l'entrée du formulaire pour le numéro
+      });
     }
   };
 
