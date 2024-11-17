@@ -39,4 +39,27 @@ router.delete('/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// PUT - Update a person's phone number
+router.put('/:id', (req, res, next) => {
+  const { number } = req.body;
+
+  if (!number) {
+    return res.status(400).json({ error: 'Number missing' });
+  }
+
+  Person.findByIdAndUpdate(
+    req.params.id,
+    { number },
+    { new: true, runValidators: true, context: 'query' }
+  )
+    .then(updatedPerson => {
+      if (updatedPerson) {
+        res.json(updatedPerson);
+      } else {
+        throw new NotFoundError();
+      }
+    })
+    .catch(err => next(err));
+});
+
 export default router;

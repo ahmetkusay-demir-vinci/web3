@@ -27,6 +27,18 @@ Content-Type: application/json
   "number": "1234567"
 }
 
+###
+
 ### DELETE a person by ID
 DELETE {{baseURL}}/persons/673a6a42a22e1b5a32efbc31
 Content-Type: application/json
+
+###
+
+### PUT - Update a person's phone number
+PUT {{baseURL}}/persons/67201659dbdeb3cd433a6891
+Content-Type: application/json
+
+{
+  "number": "987654321"
+}
