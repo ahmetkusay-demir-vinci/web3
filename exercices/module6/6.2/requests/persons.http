@@ -1,0 +1,32 @@
+# Set the base URL for the API
+@baseURL = http://localhost:3001/api
+
+### GET all persons
+GET {{baseURL}}/persons
+Content-Type: application/json
+
+###
+
+### POST a new person
+POST {{baseURL}}/persons
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "number": "12345678"
+}
+
+###
+
+### POST a new person with number less than 8 characters
+POST {{baseURL}}/persons
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "number": "1234567"
+}
+
+### DELETE a person by ID
+DELETE {{baseURL}}/persons/673a6a42a22e1b5a32efbc31
+Content-Type: application/json
