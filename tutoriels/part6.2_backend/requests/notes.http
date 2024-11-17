@@ -1,0 +1,29 @@
+# Set the base URL for the API
+@baseURL = http://localhost:3001/api
+
+### GET all notes
+GET {{baseURL}}/notes
+Content-Type: application/json
+
+###
+
+### POST a new note
+POST {{baseURL}}/notes
+Content-Type: application/json
+
+{
+    "content": "This is a note created via REST Client",
+    "important": true
+}
+
+###
+
+### GET a note by ID
+GET {{baseURL}}/notes/6726a09ec367c36c23e8686d
+Content-Type: application/json
+
+###
+
+### DELETE a note by ID
+DELETE {{baseURL}}/notes/672e5f30634f7822250637c1
+Content-Type: application/json
