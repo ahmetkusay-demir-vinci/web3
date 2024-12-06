@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import App, { HomePage, CinemaPage, MovieListPage, AddMoviePage} from "components/App/App";
+import App, { HomePage, CinemaPage, MovieListPage, AddMoviePage, MoviePage} from "components/App/App";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -12,8 +12,8 @@ const router = createBrowserRouter([
       { path: "", element: <HomePage /> },
       { path: "cinema", element: <CinemaPage /> },
       { path: "movies", element: <MovieListPage /> },
-      { path: "movies/add", element: <AddMoviePage />,
-      },
+      { path: "movies/add", element: <AddMoviePage />},
+      { path: "movies/:id", element: <MoviePage /> },
     ],
   },
 ]);
