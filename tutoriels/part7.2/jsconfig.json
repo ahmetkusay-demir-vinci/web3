@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    //permet de résoudre les chemins relatifs afin d'avoir des chemins 
+    "paths": {
+      "components/*": ["./src/components/*"],
+      "assets/*": ["./src/assets/*"],
+      "services/*": ["./src/services/*"],
+      "contexts/*": ["./src/contexts/*"]
+    }
+  }
+}
