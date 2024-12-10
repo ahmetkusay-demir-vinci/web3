@@ -1,0 +1,47 @@
+/* AddPersonForm.css */
+.add-person-form {
+  margin: 20px 0;
+  background: #fafafa;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.add-person-form h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.add-person-form div {
+  margin-bottom: 10px;
+}
+
+.add-person-form input {
+  padding: 10px;
+  width: calc(100% - 22px);
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
+}
+
+.add-person-form input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+}
+
+.add-person-form button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-person-form button:hover {
+  background-color: #45a049;
+}

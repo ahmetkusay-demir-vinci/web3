@@ -1,0 +1,28 @@
+/* PersonList.css */
+.person-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.person-list li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.person-list button {
+  margin-top: 5px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.person-list button:hover {
+  background-color: #0056b3;
+}
