@@ -1,7 +1,7 @@
-const {ApolloServer} = require('@apollo/server')
-const {startStandaloneServer} = require('@apollo/server/standalone')
+const {ApolloServer} = require('@apollo/server');
+const {startStandaloneServer} = require('@apollo/server/standalone');
 const {v1: uuid} = require('uuid');
-const {GraphQLError} = require('graphql')
+const {GraphQLError} = require('graphql');
 
 let persons = [
   {
@@ -9,27 +9,27 @@ let persons = [
     phone: "040-123543",
     street: "Tapiolankatu 5 A",
     city: "Espoo",
-    id: "3d594650-3436-11e9-bc57-8b80ba54c431"
+    id: "3d594650-3436-11e9-bc57-8b80ba54c431",
   },
   {
     name: "Matti Luukkainen",
     phone: "040-432342",
     street: "Malminkaari 10 A",
     city: "Helsinki",
-    id: '3d599470-3436-11e9-bc57-8b80ba54c431'
+    id: "3d599470-3436-11e9-bc57-8b80ba54c431",
   },
   {
     name: "Venla Ruuska",
     street: "Nallemäentie 22 C",
     city: "Helsinki",
-    id: '3d599471-3436-11e9-bc57-8b80ba54c431'
+    id: "3d599471-3436-11e9-bc57-8b80ba54c431",
   },
-]
+];
 
 const typeDefs = `
   type Address {
     street: String!
-    city: String! 
+    city: String!
   }
 
   type Person {
@@ -39,62 +39,72 @@ const typeDefs = `
     id: ID!
   }
 
+  enum YesNo {
+    YES
+    NO
+  }
+
   type Query {
     personCount: Int!
-    allPersons: [Person!]!
+    allPersons(phone: YesNo): [Person!]!
     findPerson(name: String!): Person
   }
-  
-  type Mutation {
-  addPerson(
-    name: String!
-    phone: String
-    street: String!
-    city: String!
-  ): Person
-}
-`
 
+  type Mutation {
+    addPerson(
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
+  }
+`;
+
+// resolvers permettent de définir la logique de résolution des champs
 const resolvers = {
   Query: {
     personCount: () => persons.length,
-    allPersons: () => persons,
-    findPerson: (root, args) =>
-        persons.find(p => p.name === args.name)
+    allPersons: (root, args) => {
+      if (!args.phone) {
+        return persons
+      }
+      const byPhone = (person) =>
+          args.phone === 'YES' ? person.phone : !person.phone
+      return persons.filter(byPhone)
+    },
+    findPerson: (root, args) => persons.find((p) => p.name === args.name),
   },
   Person: {
-    address: ({street, city}) => {
-      return {
-        street,
-        city,
-      }
-    },
+    address: ({street, city}) => ({
+      street,
+      city,
+    }),
   },
   Mutation: {
     addPerson: (root, args) => {
-      if (persons.find(p => p.name === args.name)) {
+      if (persons.find((p) => p.name === args.name)) {
         throw new GraphQLError('Name must be unique', {
           extensions: {
             code: 'BAD_USER_INPUT',
-            invalidArgs: args.name
-          }
-        })
+            invalidArgs: args.name,
+          },
+        });
       }
 
-      const person = {...args, id: uuid()}
-      persons = persons.concat(person)
-      return person
-    }
-  }
-}
+      const person = {...args, id: uuid()};
+      persons = persons.concat(person);
+      return person;
+    },
+  },
+};
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-})
+});
 
 startStandaloneServer(server, {
   listen: {port: 4000},
 }).then(({url}) => {
-  console.log(`Server ready at ${url}`)
-})
+  console.log(`Server ready at ${url}`);
+});
