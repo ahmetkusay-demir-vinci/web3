@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Note from "./notes.js";
+import Note from "./models/notes.js";
 
 if (process.argv.length < 3) {
   console.log(

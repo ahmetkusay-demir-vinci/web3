@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Person from "./src/models/people.js";
+import Person from "./models/people.js";
 
 if (process.argv.length < 3) {
   console.log(
