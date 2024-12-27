@@ -1,0 +1,218 @@
+MODULE 1
+
+npm create vite@latest nomDuDossier -- --template react
+cd nomDuDossier
+npm install
+npm run dev
+
+------------------------------------------------------------------------------
+
+Il faut modifier le main.jsx
+
+import App from 'components/App/App';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+------------------------------------------------------------------------------
+
+Travailler avec des components !
+Fichier jsconfig.json ( pour les imports -> ./src/components )
+Fichier eslint.config.js ( pour les erreurs de linter )
+
+------------------------------------------------------------------------------
+
+MODULE 2 (React State)
+
+Destructuring -> Disparition des props ( il ne faut plus utiliser props )
+
+Composant Stateful -> useState()
+Fonction Gestion d'évènement -> Se nomme tjrs "handle" ou "on"
+
+localstorage -> ex2.1 pour persistance du nb de clicks
+
+------------------------------------------------------------------------------
+
+MODULE 3 (+/- Similaire Mod2 mais plus complexe)
+
+Map 
+Key-attribute
+
+------------------------------------------------------------------------------
+
+MODULE 4 (HYPER IMPORTANT)
+
+Forms 
+event.preventDefault (empêche la page de se recharger, par exemple lors de l'ajout d'une note dans un formulaire)
+
+-> Bien checker le code de App.js car bcp d'info
+
+------------------------------------------------------------------------------
+
+JSON server -> fichier db.json
+	    -> npm install -g json-server
+	    -> npx json-server --port 3001 --watch db.json (exécuter le server)
+	    -> Alternative : Dans package.json mettre 
+	       "server": "json-server -p3001 --watch db.json"
+=> npm run server (le serveur s'exécute, http://localhost:3001/notes)
+
+------------------------------------------------------------------------------
+
+AXIOS (alternative pour fetch, communication /e/ navigateur et serveur)
+-> npm install axios
+-> npm install json-server --save-dev
+   Dans package.json mettre "server": "json-server -p3001 --watch db.json"
+   npm run server (le serveur s'exécute, http://localhost:3001/notes)
+   npm run dev (exécution de l'app React)
+
+-> Dossier services (pour les promesses avec la db), fichier notes.js que l'on utilisera dans le App.jsx
+
+-> .env (FAST_REFRESH=false)
+
+------------------------------------------------------------------------------
+
+MODULE 5 ( React Context)
+
+Context, Provider -> Dossier contexts avec dedans un fichier Context.jsx
+
+------------------------------------------------------------------------------
+
+Créer AppLoader.jsx -> Permet de placer le Provider autour de App afin que les 
+		       composants enfants accèdent aux informations de contexte
+=> Modifier le main.jsx pour faire appel à AppLoader.jsx
+
+import './index.css'
+import AppLoader from 'components/App/AppLoader.jsx'
+import ReactDOM from 'react-dom/client'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<AppLoader />) 
+
+------------------------------------------------------------------------------
+
+MODULE 6 (API REST avec MongoDB)
+
+Aller sur MongoDB.com, connexion avec Google
+Il faut créer un Cluster , j'en ai déjà un qui est Cluster0
+Username: kusay
+Password: ebrarkusay26
+
+Sections Importantes : Qucikstart, Network Access, Clusters
+
+Clusters => Browse Collections ( ici que se trouve mes database )
+------------------------------------------------------------------------------
+
+npm init
+npm install express
+npm install mongoose
+npm install cors
+npm install dotenv
+npm install dotenv-flow
+
+------------------------------------------------------------------------------
+PART 1
+
+Fichier mongo.js 
+Dossier models avec fichier notes.js
+
+Lancement du fichier mongo.js
+-> node mongo.js ebrarkusay26
+
+------------------------------------------------------------------------------
+PART 2
+
+npm install nodemon --save-dev (redémarre automatiquement serveur si changement)
+
+"scripts": {
+  "start": "nodemon index.js"
+}
+
+=> Lancement : npm run start
+
+index.js
+.env , config.js (dans dossier utils)
+Dossier routes
+Dossier models
+Dossier requests
+Dossier utils (va contenir config.js et les erreurs)
+middlewares.js (dans dossier utils) -> pour gestion des erreurs
+
+------------------------------------------------------------------------------
+
+MODULE 7 (React router & Ant Design)
+
+npm create vite@latest nomDuDossier -- --template react
+cd nomDuDossier
+npm i
+npm i react-router-dom (dépendance pour react router)
+
+-> npm run dev
+-------------------------------------------------------------------------------
+
+Toujours même architecture :
+main.jsx
+Dossier components (App.jsx + Navbar.jsx + ...Page.jsx)
+Dossier contexts
+jsconfig.json
+vite.config.js
+eslint.config.js
+				
+-------------------------------------------------------------------------------
+
+PART 7.1
+
+Créer des composants pour chaque page (HomePage, AboutPage, ContactPage, UserPage) et les exporter depuis App.jsx
+
+Utiliser react-router-dom pour configurer les routes dans main.jsx et faire appel à APP.jsx
+
+Créer un composant NavBar pour la navigation
+
+Stocker les données des utilisateurs dans un fichier séparé usersData.js
+
+-------------------------------------------------------------------------------
+
+PART 7.2
+
+OutletContext (Ressemble au Module 5)
+
+-> checker dans le tuto le App.jsx , HomePage.jsx et AddPizzaPage.jsx
+
+En gros on importe "Outlet" et on défini un objet Context qui va passer les fonctions et les états aux composants enfants via le "Outlet".
+
+Les enfants (HomePage et AddPizzaPage) vont récup cela avec "useOutletContext"
+
+--------------------------------------------------------------------------------
+
+EXO 7.4 ( Ant Design )
+
+Permet une facilité de gestion pour les champs, formulaire, boutton , ... Pas besoin de useState(), onChange(), ...
+
+Voir le code de AddMovieForm.jsx
+
+-------------------------------------------------------------------------------
+
+MODULE 8 (GraphQL)
+
+npm install nodemon --save-dev
+npm install @apollo/server graphql
+npm run start
+
+-------------------------------------------------------------------------------
+
+PART 8.1
+
+Fichier index.js
+
+Quand on fait npm run start, ça lance Apollo Server
+Là bas on peut tester nos Query et Mutation
+
+-------------------------------------------------------------------------------
+
+PART 8.2 
+
+part8 : Contient le serveur GraphQL.
+part8.2 : Contient l'application React.
+
+Donc dans 2 terminal diff faut démarrer le serveur mais aussi l'application react.
+
+main.jsx (configurer apollo)
