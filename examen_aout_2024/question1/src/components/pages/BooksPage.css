@@ -1,0 +1,30 @@
+.books-page {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .book-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .book-item {
+    background-color: #fff;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .book-item h2 {
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .book-item p {
+    margin: 0.5rem 0;
+  }
+  
+  .book-item select,
+  .book-item button {
+    margin-top: 0.5rem;
+  }
